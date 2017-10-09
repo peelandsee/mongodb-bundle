@@ -129,6 +129,7 @@ final class ClientRegistry
             $conf = $this->configurations[$name];
             $uri = sprintf('mongodb://%s', $conf->getHosts());
             $options = array_merge(['database' => $databaseName], $conf->getOptions());
+            $options = array_merge(['authSource' => $databaseName], $options);
             $this->clients[$clientKey] = $this->buildClient($name, $uri, $options, []);
 
             $this->eventDispatcher->dispatch(
